@@ -12,11 +12,11 @@ fi
 # Get glibc source
 if [ -d "$SRC" ]; then
     cd $SRC
-    git pull --all
+    git fetch --all --tags --prune
 else
-    git clone git://sourceware.org/git/glibc.git "$SRC"
+    git clone https://sourceware.org/git/glibc.git "$SRC"
     cd "$SRC"
-    git pull --all
+    git fetch --all --tags --prune
 fi
 
 # Checkout release
@@ -26,7 +26,7 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-git checkout "release/$1/master" -f
+git checkout "origin/release/$1/master" -f
 cd -
 
 # Build
